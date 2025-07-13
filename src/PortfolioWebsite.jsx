@@ -39,7 +39,7 @@ const Home = () => {
   const bootPrompt = "$ booting security console";
   const bootLines = [
     "[+] Initializing security console...",
-    "[+] Loading role: Cybersecurity Analyst @ UMMH",
+    "[+] Loading role: Cybersecurity Risk Analyst @ UMMH",
     "[+] Focus areas: Risk | HIPAA | SOC2 | Pen Testing",
     "[+] Background: CS Grad | Internships | OSINT",
     "[+] Mission: Secure. Comply. Defend.",
@@ -114,7 +114,7 @@ const About = () => (
             Current Role
           </h2>
           <p className="text-base leading-relaxed text-gray-300">
-            Cybersecurity Risk Analyst @ UMMH — conducting HIPAA, SOC 2, and pen test risk assessments. I specialize in identifying vulnerabilities, automating security processes, and collaborating with cross-functional teams to strengthen compliance and posture.
+            Cybersecurity Risk Analyst Intern @ UMMH — conducting HIPAA, SOC 2, and pen test risk assessments. I specialize in identifying vulnerabilities, automating security processes, and collaborating with cross-functional teams to strengthen compliance and posture.
           </p>
         </div>
 
