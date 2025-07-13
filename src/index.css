@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Fira Code', monospace;
+  background-color: #0e0e10;
+  color: #d1d5db;
+}
+
+/* === Glitch Animation for Cert/Training Titles === */
+@keyframes glitch {
+  0% { text-shadow: 1px 0 #39ff14, -1px 0 #00f0ff; }
+  20% { text-shadow: -1px 0 #ff0099, 1px 1px #00f0ff; }
+  40% { text-shadow: 1px -1px #39ff14, 0 1px #ff0099; }
+  60% { text-shadow: -1px 1px #ff0099, 1px -1px #39ff14; }
+  80% { text-shadow: 1px 0 #39ff14, -1px 0 #00f0ff; }
+  100% { text-shadow: none; }
+}
+.glitch:hover {
+  animation: glitch 0.25s linear;
+}
+
