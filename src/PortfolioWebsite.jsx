@@ -22,7 +22,7 @@ const Navbar = () => (
 const bootLines = [
   "$ ./yourname.sh --init",
   "[+] Initializing security console...",
-  "[+] Loading role: Cybersecurity Analyst @ UMMH",
+  "[+] Loading role: Cybersecurity Risk Analyst Intern @ UMMH",
   "[+] Focus areas: Risk | HIPAA | SOC2 | Pen Testing",
   "[+] Background: CS Grad | Internships | OSINT",
   "[+] Mission: Secure. Comply. Defend.",
