@@ -13,10 +13,12 @@ const Navbar = () => (
       <Link to="/about" className="hover:underline">About</Link>
       <Link to="/experience" className="hover:underline">Experience</Link>
       <Link to="/certs" className="hover:underline">Certifications</Link>
+      <Link to="/projects" className="hover:underline">Projects</Link>
       <Link to="/contact" className="hover:underline">Contact</Link>
     </div>
   </nav>
 );
+
 
 // 🔥 Terminal-style animated Home section
 const bootLines = [
@@ -39,7 +41,7 @@ const Home = () => {
   const bootPrompt = "$ booting security console";
   const bootLines = [
     "[+] Initializing security console...",
-    "[+] Loading role: Cybersecurity Risk Analyst @ UMMH",
+    "[+] Loading role: Cybersecurity Risk Analyst Intern @ UMMH",
     "[+] Focus areas: Risk | HIPAA | SOC2 | Pen Testing",
     "[+] Background: CS Grad | Internships | OSINT",
     "[+] Mission: Secure. Comply. Defend.",
@@ -205,15 +207,28 @@ const Experience = () => (
         Professional Experience
       </h2>
       <ul className="space-y-10 text-base">
+
         {/* Risk Analyst */}
         <li>
           <span className="font-bold text-white">
             Cybersecurity Risk Analyst Intern @ UMass Memorial Health
           </span>
           <ul className="list-disc ml-8 mt-2 text-gray-300 space-y-1">
-            <li>Led 20+ third-party risk assessments for vendors, apps, and internal systems.</li>
-            <li>Assessed HIPAA, HITRUST, SOC 2, and NIST 800-53 compliance.</li>
-            <li>Documented remediation plans and automated tracking via ServiceNow.</li>
+            <li>
+              Led and executed 20+ third-party risk assessments for vendors, SaaS apps, and critical internal systems.
+            </li>
+            <li>
+              Evaluated HIPAA, HITRUST, SOC 2, and NIST 800-53 controls for compliance, security, and privacy requirements.
+            </li>
+            <li>
+              Automated evidence collection and tracking using ServiceNow, reducing manual remediation follow-up by 60%.
+            </li>
+            <li>
+              Collaborated with business owners and vendors to resolve gaps and drive remediation to closure.
+            </li>
+            <li>
+              Presented findings and risk summaries to leadership, enabling informed decision-making and risk acceptance.
+            </li>
           </ul>
         </li>
 
@@ -223,9 +238,21 @@ const Experience = () => (
             Cybersecurity Analyst Intern (Rotational Program) @ UMMH
           </span>
           <ul className="list-disc ml-8 mt-2 text-gray-300 space-y-1">
-            <li>Rotated through CTIC, IAM, Risk, and Engineering teams.</li>
-            <li>Used Tenable, Shodan, VirusTotal for vulnerability enrichment.</li>
-            <li>Audited access controls with CyberArk, Varonis, Defender for Endpoint.</li>
+            <li>
+              Rotated through CTIC, IAM, Risk, and Engineering teams to gain broad experience across blue and red team operations.
+            </li>
+            <li>
+              Leveraged Tenable, Shodan, and VirusTotal to enrich vulnerability intelligence and contextualize threat data.
+            </li>
+            <li>
+              Audited privileged access and user controls with CyberArk, Varonis, and Defender for Endpoint.
+            </li>
+            <li>
+              Built scripts to automate log parsing and alerting, improving detection time and incident response.
+            </li>
+            <li>
+              Authored technical documentation and security SOPs for cross-team knowledge sharing.
+            </li>
           </ul>
         </li>
 
@@ -235,9 +262,18 @@ const Experience = () => (
             IT Support Analyst @ UMMH
           </span>
           <ul className="list-disc ml-8 mt-2 text-gray-300 space-y-1">
-            <li>Resolved 1,000+ tickets via ServiceNow, Ivanti Neurons, BeyondTrust.</li>
-            <li>Reduced recurring issues by 40% through network diagnostics.</li>
-            <li>Streamlined workflows to improve resolution time and reliability.</li>
+            <li>
+              Resolved 1,000+ tickets using ServiceNow, Ivanti Neurons, and BeyondTrust, maintaining a 97% satisfaction rating.
+            </li>
+            <li>
+              Proactively diagnosed and eliminated recurring network and endpoint issues, reducing repeat incidents by 40%.
+            </li>
+            <li>
+              Developed troubleshooting guides and trained new analysts to accelerate onboarding and team efficiency.
+            </li>
+            <li>
+              Streamlined escalation workflows to cut average response times and improve reliability.
+            </li>
           </ul>
         </li>
 
@@ -247,9 +283,18 @@ const Experience = () => (
             AI/ML Research Assistant @ QCC
           </span>
           <ul className="list-disc ml-8 mt-2 text-gray-300 space-y-1">
-            <li>Built autonomous mapping with LiDAR + ROS2 for robotics navigation.</li>
-            <li>Presented findings to 400+ attendees, focused on AI-driven path planning.</li>
-            <li>Published research and contributed to algorithm development.</li>
+            <li>
+              Built and tested autonomous mapping algorithms with LiDAR + ROS2 for advanced robotics navigation.
+            </li>
+            <li>
+              Presented technical findings to 400+ attendees at research conferences, focusing on AI-driven path planning.
+            </li>
+            <li>
+              Published research, contributed to algorithm development, and collaborated with cross-disciplinary teams.
+            </li>
+            <li>
+              Wrote, edited, and submitted abstracts for publication; managed project milestones and deliverables.
+            </li>
           </ul>
         </li>
       </ul>
@@ -319,6 +364,7 @@ const Experience = () => (
     </div>
   </div>
 );
+
 
 const Certs = () => (
   <div className="px-8 py-20 bg-black text-white font-mono min-h-screen">
@@ -430,6 +476,205 @@ const Certs = () => (
   </div>
 );
 
+
+const Projects = () => (
+  <div className="px-8 py-20 bg-black text-white font-mono min-h-screen">
+    <div className="max-w-5xl mx-auto">
+      <h2 className="text-3xl font-bold text-green-400 mb-10 border-l-4 border-green-400 pl-4 uppercase">
+        Projects
+      </h2>
+      <div className="grid gap-8 grid-cols-1 sm:grid-cols-2">
+
+        {/* Cybersecurity Projects */}
+        <div className="bg-[#1f2937] border border-[#23272e] rounded-lg p-6">
+          <h3 className="text-xl font-bold text-green-400 mb-2">
+            Enterprise Cybersecurity Homelab
+          </h3>
+          <p className="text-gray-300 mb-4">
+            Built a full homelab using pfSense, Windows Server, Splunk, and Kali Linux. Ran realistic cyberattacks, simulated blue team detections, ingested logs, and tuned SIEM alerts for detection.
+          </p>
+          <a
+            href="https://github.com/NaeemSutton/Malware-Analysis"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block text-green-400 underline text-sm"
+          >
+            GitHub
+          </a>
+        </div>
+        
+        <div className="bg-[#1f2937] border border-[#23272e] rounded-lg p-6">
+          <h3 className="text-xl font-bold text-green-400 mb-2">
+            Vulnerability Assessment Lab
+          </h3>
+          <p className="text-gray-300 mb-4">
+            Simulated a security ops team using Tenable Nessus, Windows 10, and VirtualBox. Ran scans, used CVSS for risk, and created professional PDF reports on findings and remediation.
+          </p>
+          <a
+            href="https://github.com/NaeemSutton/Software-Testing-and-Quality-Assurance-Portfolio-Submission"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block text-green-400 underline text-sm"
+          >
+            GitHub
+          </a>
+        </div>
+        
+        <div className="bg-[#1f2937] border border-[#23272e] rounded-lg p-6">
+          <h3 className="text-xl font-bold text-green-400 mb-2">
+            Malware Analysis Portfolio
+          </h3>
+          <p className="text-gray-300 mb-4">
+            Analyzed malware samples, performed static/dynamic analysis, and documented findings. Tools used: PE Studio, VirusTotal, IDA Free, Cuckoo Sandbox, etc.
+          </p>
+          <a
+            href="https://github.com/NaeemSutton/Malware-Analysis"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block text-green-400 underline text-sm"
+          >
+            GitHub
+          </a>
+        </div>
+        
+        <div className="bg-[#1f2937] border border-[#23272e] rounded-lg p-6">
+          <h3 className="text-xl font-bold text-green-400 mb-2">
+            Phishing Awareness Training
+          </h3>
+          <p className="text-gray-300 mb-4">
+            Created a phishing simulation toolkit and awareness campaign to train users on social engineering and email attack prevention.
+          </p>
+          <a
+            href="https://github.com/NaeemSutton/Phishing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block text-green-400 underline text-sm"
+          >
+            GitHub
+          </a>
+        </div>
+
+        <div className="bg-[#1f2937] border border-[#23272e] rounded-lg p-6">
+          <h3 className="text-xl font-bold text-green-400 mb-2">
+            Password Manager
+          </h3>
+          <p className="text-gray-300 mb-4">
+            Developed a secure password manager app (Python, SQLite, Tkinter) with encryption and local vault storage.
+          </p>
+          <a
+            href="https://github.com/NaeemSutton/Password-Manager"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block text-green-400 underline text-sm"
+          >
+            GitHub
+          </a>
+        </div>
+
+        {/* Software/CS Projects */}
+        <div className="bg-[#1f2937] border border-[#23272e] rounded-lg p-6">
+          <h3 className="text-xl font-bold text-green-400 mb-2">
+            CS330 Final Project: 3D Desk Scene
+          </h3>
+          <p className="text-gray-300 mb-4">
+            Built a realistic 3D computer desk scene in C++/OpenGL, with custom meshes, textures, and lighting.
+          </p>
+          <a
+            href="https://github.com/NaeemSutton/cs330-final-project"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block text-green-400 underline text-sm"
+          >
+            GitHub
+          </a>
+        </div>
+        
+        <div className="bg-[#1f2937] border border-[#23272e] rounded-lg p-6">
+          <h3 className="text-xl font-bold text-green-400 mb-2">
+            Lunar Landing Simulator
+          </h3>
+          <p className="text-gray-300 mb-4">
+            Physics-based lunar lander simulation. Implemented motion controls and landing logic using C++.
+          </p>
+          <a
+            href="https://github.com/NaeemSutton/LunarLanding"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block text-green-400 underline text-sm"
+          >
+            GitHub
+          </a>
+        </div>
+        
+        <div className="bg-[#1f2937] border border-[#23272e] rounded-lg p-6">
+          <h3 className="text-xl font-bold text-green-400 mb-2">
+            Hilbert Curve for ROS2 Robots
+          </h3>
+          <p className="text-gray-300 mb-4">
+            Implemented Hilbert curve pathing in Python/ROS2 for robotic mapping, navigation, and path optimization.
+          </p>
+          <a
+            href="https://github.com/NaeemSutton/Hilbert-Curve-for-ROS-2-Robots"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block text-green-400 underline text-sm"
+          >
+            GitHub
+          </a>
+        </div>
+        
+        <div className="bg-[#1f2937] border border-[#23272e] rounded-lg p-6">
+          <h3 className="text-xl font-bold text-green-400 mb-2">
+            Software Testing & QA Portfolio
+          </h3>
+          <p className="text-gray-300 mb-4">
+            Portfolio of testing artifacts, automated test scripts, and QA docs for full-stack software projects.
+          </p>
+          <a
+            href="https://github.com/NaeemSutton/Software-Testing-and-Quality-Assurance-Portfolio-Submission"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block text-green-400 underline text-sm"
+          >
+            GitHub
+          </a>
+        </div>
+        
+        {/* Portfolio Website (optional at bottom) */}
+        <div className="bg-[#1f2937] border border-[#23272e] rounded-lg p-6">
+          <h3 className="text-xl font-bold text-green-400 mb-2">
+            Cybersecurity Portfolio Website
+          </h3>
+          <p className="text-gray-300 mb-4">
+            This site! React + Tailwind CSS, with animated terminal and mobile-first design. Deployed via GitHub Pages.
+          </p>
+          <a
+            href="https://github.com/NaeemSutton/your-repo-name"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block text-green-400 underline text-sm"
+          >
+            View Code
+          </a>
+          <span className="mx-2 text-gray-600">|</span>
+          <a
+            href="https://naeemsutton.github.io/your-repo-name/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block text-green-400 underline text-sm"
+          >
+            Live Site
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+
+
+
+
 const Contact = () => (
   <div className="min-h-screen bg-black text-white font-mono flex items-center justify-center px-2 py-4 -mt-32">
     <div className="max-w-xl mx-auto w-full">
@@ -474,6 +719,8 @@ const Contact = () => (
 );
 
 
+
+
 export default function PortfolioWebsite() {
   return (
     <Router>
@@ -484,6 +731,7 @@ export default function PortfolioWebsite() {
           <Route path="/about" element={<About />} />
           <Route path="/experience" element={<Experience />} />
           <Route path="/certs" element={<Certs />} />
+          <Route path="/projects" element={<Projects />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </div>
