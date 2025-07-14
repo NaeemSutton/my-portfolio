@@ -2,8 +2,11 @@
 import React, { useEffect, useState } from "react";
 import { HashRouter as Router, Route, Routes, Link } from "react-router-dom";
 import FakeTerminal from "./FakeTerminal";
+import { motion } from "framer-motion";
 import { FaCertificate, FaGraduationCap } from "react-icons/fa";
 import { FaGithub, FaLinkedin, FaDiscord, FaCube } from "react-icons/fa";
+import { Typewriter } from 'react-simple-typewriter';
+import TerminalSection from "./TerminalSection";
 
 const Navbar = () => (
   <nav className="flex justify-between items-center p-4 shadow-md text-white bg-black">
@@ -52,10 +55,10 @@ const Home = () => {
     if (bootText.length < bootPrompt.length) {
       const timeout = setTimeout(() => {
         setBootText((prev) => prev + bootPrompt[prev.length]);
-      }, 40);
+      }, 20); // was 40
       return () => clearTimeout(timeout);
     } else {
-      setTimeout(() => setShowRest(true), 400);
+      setTimeout(() => setShowRest(true), 200); // was 400
     }
   }, [bootText]);
 
@@ -76,7 +79,7 @@ const Home = () => {
         setLineIndex(lineIndex + 1);
         setCharIndex(0);
       }
-    }, 25);
+    }, 12); // was 25
 
     return () => clearTimeout(timeout);
   }, [showRest, lineIndex, charIndex, lines]);
@@ -105,6 +108,7 @@ const Home = () => {
     </div>
   );
 };
+
 
 const About = () => (
   <div className="px-8 py-20 bg-black text-white font-mono">
@@ -194,176 +198,160 @@ const About = () => (
             <li>HIPAA, NIST 800-53, SOC 2</li>
           </ul>
         </div>
+        
       </div>
+     <div className="mt-6 text-terminalGreen">[EOF]</div>
     </div>
+    
   </div>
 );
 
+const Experience = () => {
+  const [typedExpCmd, setTypedExpCmd] = useState("");
+  const [typedSkillCmd, setTypedSkillCmd] = useState("");
+  const [showExperience, setShowExperience] = useState(false);
+  const [showSkillCmd, setShowSkillCmd] = useState(false);
+  const [showSkills, setShowSkills] = useState(false);
 
-const Experience = () => (
-  <div className="px-8 py-20 bg-black text-white font-mono min-h-screen">
-    <div className="max-w-4xl mx-auto">
-      <h2 className="text-3xl font-bold text-green-400 mb-10 border-l-4 border-green-400 pl-4 uppercase">
-        Professional Experience
-      </h2>
-      <ul className="space-y-10 text-base">
+  const expCmd = "$ cat experience.txt";
+  const skillCmd = "$ cat skills.txt";
 
-        {/* Risk Analyst */}
-        <li>
-          <span className="font-bold text-white">
-            Cybersecurity Risk Analyst Intern @ UMass Memorial Health
-          </span>
-          <ul className="list-disc ml-8 mt-2 text-gray-300 space-y-1">
-            <li>
-              Led and executed 20+ third-party risk assessments for vendors, SaaS apps, and critical internal systems.
-            </li>
-            <li>
-              Evaluated HIPAA, HITRUST, SOC 2, and NIST 800-53 controls for compliance, security, and privacy requirements.
-            </li>
-            <li>
-              Automated evidence collection and tracking using ServiceNow, reducing manual remediation follow-up by 60%.
-            </li>
-            <li>
-              Collaborated with business owners and vendors to resolve gaps and drive remediation to closure.
-            </li>
-            <li>
-              Presented findings and risk summaries to leadership, enabling informed decision-making and risk acceptance.
-            </li>
-          </ul>
-        </li>
+  useEffect(() => {
+    if (typedExpCmd.length < expCmd.length) {
+      const timeout = setTimeout(() => {
+        setTypedExpCmd(expCmd.slice(0, typedExpCmd.length + 1));
+      }, 35);
+      return () => clearTimeout(timeout);
+    } else {
+      setTimeout(() => {
+        setShowExperience(true);
+        setTimeout(() => setShowSkillCmd(true), 800);
+      }, 400);
+    }
+  }, [typedExpCmd]);
 
-        {/* Analyst Rotational */}
-        <li>
-          <span className="font-bold text-white">
-            Cybersecurity Analyst Intern (Rotational Program) @ UMMH
-          </span>
-          <ul className="list-disc ml-8 mt-2 text-gray-300 space-y-1">
-            <li>
-              Rotated through CTIC, IAM, Risk, and Engineering teams to gain broad experience across blue and red team operations.
-            </li>
-            <li>
-              Leveraged Tenable, Shodan, and VirusTotal to enrich vulnerability intelligence and contextualize threat data.
-            </li>
-            <li>
-              Audited privileged access and user controls with CyberArk, Varonis, and Defender for Endpoint.
-            </li>
-            <li>
-              Built scripts to automate log parsing and alerting, improving detection time and incident response.
-            </li>
-            <li>
-              Authored technical documentation and security SOPs for cross-team knowledge sharing.
-            </li>
-          </ul>
-        </li>
+  useEffect(() => {
+    if (!showSkillCmd) return;
+    if (typedSkillCmd.length < skillCmd.length) {
+      const timeout = setTimeout(() => {
+        setTypedSkillCmd(skillCmd.slice(0, typedSkillCmd.length + 1));
+      }, 35);
+      return () => clearTimeout(timeout);
+    } else {
+      setTimeout(() => setShowSkills(true), 400);
+    }
+  }, [typedSkillCmd, showSkillCmd]);
 
-        {/* IT Support */}
-        <li>
-          <span className="font-bold text-white">
-            IT Support Analyst @ UMMH
-          </span>
-          <ul className="list-disc ml-8 mt-2 text-gray-300 space-y-1">
-            <li>
-              Resolved 1,000+ tickets using ServiceNow, Ivanti Neurons, and BeyondTrust, maintaining a 97% satisfaction rating.
-            </li>
-            <li>
-              Proactively diagnosed and eliminated recurring network and endpoint issues, reducing repeat incidents by 40%.
-            </li>
-            <li>
-              Developed troubleshooting guides and trained new analysts to accelerate onboarding and team efficiency.
-            </li>
-            <li>
-              Streamlined escalation workflows to cut average response times and improve reliability.
-            </li>
-          </ul>
-        </li>
+  return (
+    <div className="bg-black text-terminalGreen font-mono min-h-screen px-4 py-20 text-[17px] lg:text-lg flex flex-col items-center">
+      <div className="w-full max-w-4xl">
+        <div>
+          {typedExpCmd}
+          {typedExpCmd.length < expCmd.length && <span className="animate-blink">█</span>}
+        </div>
 
-        {/* Research Assistant */}
-        <li>
-          <span className="font-bold text-white">
-            AI/ML Research Assistant @ QCC
-          </span>
-          <ul className="list-disc ml-8 mt-2 text-gray-300 space-y-1">
-            <li>
-              Built and tested autonomous mapping algorithms with LiDAR + ROS2 for advanced robotics navigation.
-            </li>
-            <li>
-              Presented technical findings to 400+ attendees at research conferences, focusing on AI-driven path planning.
-            </li>
-            <li>
-              Published research, contributed to algorithm development, and collaborated with cross-disciplinary teams.
-            </li>
-            <li>
-              Wrote, edited, and submitted abstracts for publication; managed project milestones and deliverables.
-            </li>
-          </ul>
-        </li>
-      </ul>
+        {showExperience && (
+          <div className="mt-4 text-terminalText animate-fade-in delay-200 whitespace-pre-wrap">
+            <div>
+              <span className="text-terminalGreen">[+] UMASS MEMORIAL HEALTH</span>
+              {`
+Cybersecurity Risk Analyst Intern | 2025–Present  
+└─ Conducted 20+ third-party risk assessments across vendors, SaaS platforms, and internal systems  
+└─ Assessed HIPAA, HITRUST, SOC 2, and NIST 800-53 controls to evaluate compliance and risk posture  
+└─ Automated evidence collection in ServiceNow, reducing manual remediation effort by 60%  
+└─ Partnered with business owners to resolve findings and drive remediation to closure  
+└─ Delivered risk reports and executive summaries to leadership and decision-makers  
+`}
+            </div>
 
-      {/* SKILLS GRID */}
-      <h2 className="text-2xl font-bold text-green-400 mt-16 mb-8 border-l-4 border-green-400 pl-4 uppercase">
-        Technical Skills
-      </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-gray-200 text-base">
-        {/* Programming */}
-        <div>
-          <span className="font-bold text-white">Programming</span>
-          <div className="mt-2">
-            Python, Bash, PowerShell, JavaScript, SQL, HTML/CSS
+            <div className="mt-4">
+              <span className="text-terminalGreen">[+] UMASS MEMORIAL HEALTH</span>
+              {`
+Cybersecurity Analyst Intern | 2024–2025  
+└─ Rotated across IAM, CTIC, Risk, and Engineering teams for cross-functional exposure  
+└─ Performed reconnaissance using Shodan, Tenable, and VirusTotal for asset discovery  
+└─ Authored standard operating procedures (SOPs) and automated detection logic  
+`}
+            </div>
+
+            <div className="mt-4">
+              <span className="text-terminalGreen">[+] UMASS MEMORIAL HEALTH</span>
+              {`
+IT Support Analyst | 2023–2024 
+└─ Resolved 1,000+ technical tickets using ServiceNow, Ivanti, and BeyondTrust with 97% satisfaction  
+└─ Identified and mitigated root causes of recurring incidents, reducing ticket volume by 40%  
+└─ Created technical documentation and onboarding guides to streamline team training  
+`}
+            </div>
+
+            <div className="mt-4">
+              <span className="text-terminalGreen">[+] Quinsigamond Community College</span>
+              {`
+AI/ML Research Assistant | 2023–2024
+└─ Developed LiDAR-based object detection system for autonomous robotics navigation  
+└─ Presented machine learning research to 400+ attendees at the Massachusetts STEM Summit 
+`}
+            </div>
           </div>
-        </div>
-        {/* Web Security */}
-        <div>
-          <span className="font-bold text-white">Web Security</span>
-          <div className="mt-2">
-            Burp Suite, OWASP ZAP, SSRF/IDOR, JWT, Recon tooling
+        )}
+
+        {showSkillCmd && (
+          <div className="mt-8">
+            {typedSkillCmd}
+            {typedSkillCmd.length < skillCmd.length && <span className="animate-blink">█</span>}
           </div>
-        </div>
-        {/* Cloud & Infrastructure */}
-        <div>
-          <span className="font-bold text-white">Cloud & Infrastructure</span>
-          <div className="mt-2">
-            AWS, Azure, Docker, Kubernetes, GitHub Actions
-          </div>
-        </div>
-        {/* Identity & Access */}
-        <div>
-          <span className="font-bold text-white">Identity & Access</span>
-          <div className="mt-2">
-            Azure AD, AWS IAM, Okta, Conditional Access, RBAC, JIT
-          </div>
-        </div>
-        {/* Detection & Monitoring */}
-        <div>
-          <span className="font-bold text-white">Detection & Monitoring</span>
-          <div className="mt-2">
-            SIEM, EDR tuning, Threat Hunting, Log Engineering, Sysmon
-          </div>
-        </div>
-        {/* Automation */}
-        <div>
-          <span className="font-bold text-white">Automation & CI/CD</span>
-          <div className="mt-2">
-            Python, Bash, PowerShell, GitHub Actions, Jenkins, REST APIs
-          </div>
-        </div>
-        {/* Adversary Simulation */}
-        <div>
-          <span className="font-bold text-white">Adversary Simulation</span>
-          <div className="mt-2">
-            MITRE ATT&CK, Threat Modeling, Red/Blue Team Ops, TTP Validation
-          </div>
-        </div>
-        {/* Compliance */}
-        <div>
-          <span className="font-bold text-white">Compliance & Frameworks</span>
-          <div className="mt-2">
-            NIST 800-53, SOC 2, Zero Trust (NIST 800-207), ISO 27001
-          </div>
-        </div>
+        )}
+
+       {showSkills && (
+  <div className="mt-4 text-terminalText animate-fade-in delay-500">
+    <div className="text-[18px] md:text-[20px] font-bold mb-6">TECHNICAL SKILLS</div>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 text-[16px] md:text-[17px]">
+      <div>
+        <div className="font-bold text-terminalGreen">PROGRAMMING</div>
+        <div>Python, Bash, PowerShell, JavaScript, SQL, HTML/CSS</div>
+      </div>
+      <div>
+        <div className="font-bold text-terminalGreen">WEB SECURITY</div>
+        <div>Burp Suite, OWASP ZAP, SSRF/IDOR, JWT manipulation, Recon tooling</div>
+      </div>
+      <div>
+        <div className="font-bold text-terminalGreen">CLOUD & INFRASTRUCTURE</div>
+        <div>AWS, Azure, GCP, Docker, Kubernetes, GitHub Actions, Terraform</div>
+      </div>
+      <div>
+        <div className="font-bold text-terminalGreen">IDENTITY & ACCESS</div>
+        <div>Azure AD, AWS IAM, Okta, Entra ID, SAML, SCIM, RBAC, JIT</div>
+      </div>
+      <div>
+        <div className="font-bold text-terminalGreen">DETECTION & MONITORING</div>
+        <div>SIEM, EDR tuning, Threat Hunting, Detection-as-Code, Log Engineering, Sysmon</div>
+      </div>
+      <div>
+        <div className="font-bold text-terminalGreen">AUTOMATION & CI/CD</div>
+        <div>Python, PowerShell, Bash, GitHub Actions, Jenkins, REST APIs</div>
+      </div>
+      <div>
+        <div className="font-bold text-terminalGreen">ADVERSARY SIMULATION</div>
+        <div>MITRE ATT&CK, Threat Modeling, Red/Blue Team Ops, TTP Validation</div>
+      </div>
+      <div>
+        <div className="font-bold text-terminalGreen">COMPLIANCE & FRAMEWORKS</div>
+        <div>Zero Trust (NIST 800-207), NIST 800-53, ISO 27001, FedRAMP, SOC 2</div>
       </div>
     </div>
+    <div className="mt-6 text-terminalGreen">[EOF]</div>
   </div>
-);
+)}
+
+
+      </div>
+    </div>
+  );
+};
+
+
+
+
 
 
 const Certs = () => (
@@ -472,6 +460,7 @@ const Certs = () => (
           </span>
         </a>
       </div>
+      <div className="mt-6 text-terminalGreen">[EOF]</div>
     </div>
   </div>
 );
@@ -480,194 +469,102 @@ const Certs = () => (
 const Projects = () => (
   <div className="px-8 py-20 bg-black text-white font-mono min-h-screen">
     <div className="max-w-5xl mx-auto">
-      <h2 className="text-3xl font-bold text-green-400 mb-10 border-l-4 border-green-400 pl-4 uppercase">
+      <h2 className="text-3xl font-bold text-green-400 mb-10 border-l-4 border-green-400 pl-4 uppercase animate-fade-up">
         Projects
       </h2>
+
       <div className="grid gap-8 grid-cols-1 sm:grid-cols-2">
+        {[
+          {
+            title: "Enterprise Cybersecurity Homelab",
+            desc: "Built a full homelab using pfSense, Windows Server, Splunk, and Kali Linux. Ran realistic cyberattacks, simulated blue team detections, ingested logs, and tuned SIEM alerts for detection.",
+            link: "https://github.com/NaeemSutton/Malware-Analysis",
+          },
+          {
+            title: "Vulnerability Assessment Lab",
+            desc: "Simulated a security ops team using Tenable Nessus, Windows 10, and VirtualBox. Ran scans, used CVSS for risk, and created professional PDF reports on findings and remediation.",
+            link: "https://github.com/NaeemSutton/Software-Testing-and-Quality-Assurance-Portfolio-Submission",
+          },
+          {
+            title: "Malware Analysis Portfolio",
+            desc: "Analyzed malware samples, performed static/dynamic analysis, and documented findings. Tools used: PE Studio, VirusTotal, IDA Free, Cuckoo Sandbox, etc.",
+            link: "https://github.com/NaeemSutton/Malware-Analysis",
+          },
+          {
+            title: "Phishing Awareness Training",
+            desc: "Created a phishing simulation toolkit and awareness campaign to train users on social engineering and email attack prevention.",
+            link: "https://github.com/NaeemSutton/Phishing",
+          },
+          {
+            title: "Password Manager",
+            desc: "Developed a secure password manager app (Python, SQLite, Tkinter) with encryption and local vault storage.",
+            link: "https://github.com/NaeemSutton/Password-Manager",
+          },
+          {
+            title: "CS330 Final Project: 3D Desk Scene",
+            desc: "Built a realistic 3D computer desk scene in C++/OpenGL, with custom meshes, textures, and lighting.",
+            link: "https://github.com/NaeemSutton/cs330-final-project",
+          },
+          {
+            title: "Lunar Landing Simulator",
+            desc: "Physics-based lunar lander simulation. Implemented motion controls and landing logic using C++.",
+            link: "https://github.com/NaeemSutton/LunarLanding",
+          },
+          {
+            title: "Hilbert Curve for ROS2 Robots",
+            desc: "Implemented Hilbert curve pathing in Python/ROS2 for robotic mapping, navigation, and path optimization.",
+            link: "https://github.com/NaeemSutton/Hilbert-Curve-for-ROS-2-Robots",
+          },
+          {
+            title: "Software Testing & QA Portfolio",
+            desc: "Portfolio of testing artifacts, automated test scripts, and QA docs for full-stack software projects.",
+            link: "https://github.com/NaeemSutton/Software-Testing-and-Quality-Assurance-Portfolio-Submission",
+          },
+          {
+            title: "Cybersecurity Portfolio Website",
+            desc: "This site! React + Tailwind CSS, with animated terminal and mobile-first design. Deployed via GitHub Pages.",
+            link: "https://github.com/NaeemSutton/my-portfolio",
+            extra: "https://naeemsutton.github.io/my-portfolio",
+          },
+        ].map((project, i) => (
+          <div
+            key={i}
+            className="bg-terminalSoft border border-[#23272e] rounded-lg p-6 transform transition-all duration-300 hover:scale-105 hover:border-green-400 hover:shadow-lg hover:shadow-green-500/20 animate-fade-up"
+            style={{ animationDelay: `${i * 100}ms`, animationFillMode: "both" }}
+          >
+            <h3 className="text-xl font-bold text-green-400 mb-2">{project.title}</h3>
+            <p className="text-gray-300 mb-4">{project.desc}</p>
 
-        {/* Cybersecurity Projects */}
-        <div className="bg-[#1f2937] border border-[#23272e] rounded-lg p-6">
-          <h3 className="text-xl font-bold text-green-400 mb-2">
-            Enterprise Cybersecurity Homelab
-          </h3>
-          <p className="text-gray-300 mb-4">
-            Built a full homelab using pfSense, Windows Server, Splunk, and Kali Linux. Ran realistic cyberattacks, simulated blue team detections, ingested logs, and tuned SIEM alerts for detection.
-          </p>
-          <a
-            href="https://github.com/NaeemSutton/Malware-Analysis"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block text-green-400 underline text-sm"
-          >
-            GitHub
-          </a>
-        </div>
-        
-        <div className="bg-[#1f2937] border border-[#23272e] rounded-lg p-6">
-          <h3 className="text-xl font-bold text-green-400 mb-2">
-            Vulnerability Assessment Lab
-          </h3>
-          <p className="text-gray-300 mb-4">
-            Simulated a security ops team using Tenable Nessus, Windows 10, and VirtualBox. Ran scans, used CVSS for risk, and created professional PDF reports on findings and remediation.
-          </p>
-          <a
-            href="https://github.com/NaeemSutton/Software-Testing-and-Quality-Assurance-Portfolio-Submission"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block text-green-400 underline text-sm"
-          >
-            GitHub
-          </a>
-        </div>
-        
-        <div className="bg-[#1f2937] border border-[#23272e] rounded-lg p-6">
-          <h3 className="text-xl font-bold text-green-400 mb-2">
-            Malware Analysis Portfolio
-          </h3>
-          <p className="text-gray-300 mb-4">
-            Analyzed malware samples, performed static/dynamic analysis, and documented findings. Tools used: PE Studio, VirusTotal, IDA Free, Cuckoo Sandbox, etc.
-          </p>
-          <a
-            href="https://github.com/NaeemSutton/Malware-Analysis"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block text-green-400 underline text-sm"
-          >
-            GitHub
-          </a>
-        </div>
-        
-        <div className="bg-[#1f2937] border border-[#23272e] rounded-lg p-6">
-          <h3 className="text-xl font-bold text-green-400 mb-2">
-            Phishing Awareness Training
-          </h3>
-          <p className="text-gray-300 mb-4">
-            Created a phishing simulation toolkit and awareness campaign to train users on social engineering and email attack prevention.
-          </p>
-          <a
-            href="https://github.com/NaeemSutton/Phishing"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block text-green-400 underline text-sm"
-          >
-            GitHub
-          </a>
-        </div>
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`GitHub link for ${project.title}`}
+              className="inline-block text-green-400 underline text-sm focus-visible:outline focus-visible:outline-1 focus-visible:outline-green-400"
+            >
+              GitHub
+            </a>
 
-        <div className="bg-[#1f2937] border border-[#23272e] rounded-lg p-6">
-          <h3 className="text-xl font-bold text-green-400 mb-2">
-            Password Manager
-          </h3>
-          <p className="text-gray-300 mb-4">
-            Developed a secure password manager app (Python, SQLite, Tkinter) with encryption and local vault storage.
-          </p>
-          <a
-            href="https://github.com/NaeemSutton/Password-Manager"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block text-green-400 underline text-sm"
-          >
-            GitHub
-          </a>
-        </div>
-
-        {/* Software/CS Projects */}
-        <div className="bg-[#1f2937] border border-[#23272e] rounded-lg p-6">
-          <h3 className="text-xl font-bold text-green-400 mb-2">
-            CS330 Final Project: 3D Desk Scene
-          </h3>
-          <p className="text-gray-300 mb-4">
-            Built a realistic 3D computer desk scene in C++/OpenGL, with custom meshes, textures, and lighting.
-          </p>
-          <a
-            href="https://github.com/NaeemSutton/cs330-final-project"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block text-green-400 underline text-sm"
-          >
-            GitHub
-          </a>
-        </div>
-        
-        <div className="bg-[#1f2937] border border-[#23272e] rounded-lg p-6">
-          <h3 className="text-xl font-bold text-green-400 mb-2">
-            Lunar Landing Simulator
-          </h3>
-          <p className="text-gray-300 mb-4">
-            Physics-based lunar lander simulation. Implemented motion controls and landing logic using C++.
-          </p>
-          <a
-            href="https://github.com/NaeemSutton/LunarLanding"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block text-green-400 underline text-sm"
-          >
-            GitHub
-          </a>
-        </div>
-        
-        <div className="bg-[#1f2937] border border-[#23272e] rounded-lg p-6">
-          <h3 className="text-xl font-bold text-green-400 mb-2">
-            Hilbert Curve for ROS2 Robots
-          </h3>
-          <p className="text-gray-300 mb-4">
-            Implemented Hilbert curve pathing in Python/ROS2 for robotic mapping, navigation, and path optimization.
-          </p>
-          <a
-            href="https://github.com/NaeemSutton/Hilbert-Curve-for-ROS-2-Robots"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block text-green-400 underline text-sm"
-          >
-            GitHub
-          </a>
-        </div>
-        
-        <div className="bg-[#1f2937] border border-[#23272e] rounded-lg p-6">
-          <h3 className="text-xl font-bold text-green-400 mb-2">
-            Software Testing & QA Portfolio
-          </h3>
-          <p className="text-gray-300 mb-4">
-            Portfolio of testing artifacts, automated test scripts, and QA docs for full-stack software projects.
-          </p>
-          <a
-            href="https://github.com/NaeemSutton/Software-Testing-and-Quality-Assurance-Portfolio-Submission"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block text-green-400 underline text-sm"
-          >
-            GitHub
-          </a>
-        </div>
-        
-        {/* Portfolio Website (optional at bottom) */}
-        <div className="bg-[#1f2937] border border-[#23272e] rounded-lg p-6">
-          <h3 className="text-xl font-bold text-green-400 mb-2">
-            Cybersecurity Portfolio Website
-          </h3>
-          <p className="text-gray-300 mb-4">
-            This site! React + Tailwind CSS, with animated terminal and mobile-first design. Deployed via GitHub Pages.
-          </p>
-          <a
-            href="https://github.com/NaeemSutton/your-repo-name"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block text-green-400 underline text-sm"
-          >
-            View Code
-          </a>
-          <span className="mx-2 text-gray-600">|</span>
-          <a
-            href="https://naeemsutton.github.io/your-repo-name/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block text-green-400 underline text-sm"
-          >
-            Live Site
-          </a>
-        </div>
+            {project.extra && (
+              <>
+                <span className="mx-2 text-gray-600">|</span>
+                <a
+                  href={project.extra}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Live site for ${project.title}`}
+                  className="inline-block text-green-400 underline text-sm focus-visible:outline focus-visible:outline-1 focus-visible:outline-green-400"
+                >
+                  Live Site
+                </a>
+              </>
+            )}
+          </div>
+        ))}
       </div>
+      <div className="mt-6 text-terminalGreen">[EOF]</div>
     </div>
+    
   </div>
 );
 
