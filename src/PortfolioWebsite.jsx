@@ -243,8 +243,9 @@ const Experience = () => {
   }, [typedSkillCmd, showSkillCmd]);
 
   return (
-    <div className="bg-black text-terminalGreen font-mono min-h-screen px-4 py-20 text-[17px] lg:text-lg flex flex-col items-center">
-      <div className="w-full max-w-4xl">
+    <div className="bg-black text-terminalGreen font-mono min-h-screen px-4 py-20 text-[17px] lg:text-lg flex justify-center">
+        <div className="w-full max-w-4xl pl-6 md:pl-20">
+
         <div>
           {typedExpCmd}
           {typedExpCmd.length < expCmd.length && <span className="animate-blink">█</span>}
@@ -257,9 +258,7 @@ const Experience = () => {
               {`
 Cybersecurity Risk Analyst Intern | 2025–Present  
 └─ Conducted 20+ third-party risk assessments across vendors, SaaS platforms, and internal systems  
-└─ Assessed HIPAA, HITRUST, SOC 2, and NIST 800-53 controls to evaluate compliance and risk posture  
-└─ Automated evidence collection in ServiceNow, reducing manual remediation effort by 60%  
-└─ Partnered with business owners to resolve findings and drive remediation to closure  
+└─ Assessed HIPAA, HITRUST, SOC 2, and NIST 800-53 controls to evaluate compliance and risk posture     
 └─ Delivered risk reports and executive summaries to leadership and decision-makers  
 `}
             </div>
@@ -284,14 +283,7 @@ IT Support Analyst | 2023–2024
 `}
             </div>
 
-            <div className="mt-4">
-              <span className="text-terminalGreen">[+] Quinsigamond Community College</span>
-              {`
-AI/ML Research Assistant | 2023–2024
-└─ Developed LiDAR-based object detection system for autonomous robotics navigation  
-└─ Presented machine learning research to 400+ attendees at the Massachusetts STEM Summit 
-`}
-            </div>
+           
           </div>
         )}
 
